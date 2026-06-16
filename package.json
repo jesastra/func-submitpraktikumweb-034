@@ -10,7 +10,7 @@
     "@azure/functions": "^4.0.0",
     "mysql2": "^3.22.5"
   },
-  "main": "src/{index.js,functions/*.js}",
+  "main": "src/UpdateStatusTugas/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jesastra/func-submitpraktikumweb-034.git"

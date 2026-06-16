@@ -11,22 +11,24 @@ module.exports = async function (context, myBlob) {
 
     const fileUrl = `https://${process.env.STORAGE_ACCOUNT_NAME}.blob.core.windows.net/tugas-praktikum/${fileName}`;
 
-    // Koneksi ke Database
-    const conn = await mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: 'db_praktikumsubmit',
-        ssl: { rejectUnauthorized: false }
-    });
-
+    let conn;
     try {
+        // Koneksi ke Database menggunakan env vars (ditambahkan di local.settings.json/App Settings)
+        conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME || 'db_praktikumsubmit',
+            port: parseInt(process.env.DB_PORT || '3306', 10),
+            ssl: { rejectUnauthorized: false }
+        });
+
         // 3. Mengubah status dari Pending menjadi Submitted di database (Skenario 1 & 2)
         await conn.execute("UPDATE submissions SET status = 'Submitted' WHERE file_url = ?", [fileUrl]);
         context.log("[LOG UPLOAD] Status pengumpulan di database berhasil diperbarui menjadi: Submitted");
     } catch (error) {
         context.log.error("Gagal update database:", error);
     } finally {
-        await conn.end();
+        if (conn) await conn.end();
     }
 };
