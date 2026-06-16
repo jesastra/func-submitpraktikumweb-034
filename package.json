@@ -1,0 +1,26 @@
+{
+  "name": "func-submitpraktikumweb-034",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0",
+    "mysql2": "^3.22.5"
+  },
+  "main": "src/{index.js,functions/*.js}",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesastra/func-submitpraktikumweb-034.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jesastra/func-submitpraktikumweb-034/issues"
+  },
+  "homepage": "https://github.com/jesastra/func-submitpraktikumweb-034#readme"
+}
